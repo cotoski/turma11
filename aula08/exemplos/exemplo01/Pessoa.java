@@ -1,6 +1,8 @@
 package exemplos.exemplo01;
 
-public class Pessoa {// extends Object{ //superclasse
+//uma classe abstrata serve como modelo para outras classes
+
+public abstract class Pessoa {// extends Object{ //superclasse
     private String nome;
     private String endereco;
     private String telefone;
