@@ -2,12 +2,16 @@ package exercicio03;
 
 public class AppConta {
     public static void main(String[] args) {
-        Conta c = new Conta(1111);
+        ContaCorrente cc = new ContaCorrente(1111);
+        ContaEspecial ce = new ContaEspecial(22222, 100);
 
-        c.depositar(100);
-        c.sacar(500);
-        c.sacar(50);
+        cc.depositar(100);
+        cc.sacar(500);
+        cc.sacar(50);
+        System.out.println(cc);
 
-        System.out.println(c);
+        ce.depositar(200);
+        ce.sacar(250);
+        System.out.println(ce);
     }
 }

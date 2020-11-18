@@ -1,6 +1,6 @@
 package exercicio03;
 
-public class Conta {
+public abstract class Conta {
     private int numero;
     private double saldo;
 
