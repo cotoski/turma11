@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class AppConta {
     public static void main(String[] args) {
         Scanner teclado = new Scanner(System.in);
-        int menu;
+        int menu = 0;
         int numeroConta;
         double limite, valor;
         GerenciaConta gerenciaConta = new GerenciaConta();
@@ -18,8 +18,16 @@ public class AppConta {
             System.out.println("5-fazer saque");
             System.out.println("6-Exibir saldo");
             System.out.println("7-Sair");
-            menu = teclado.nextInt();
-
+            
+            try {
+                menu = teclado.nextInt();    
+            } catch (Exception e) {
+                System.out.println("Entrada inválida.");
+                //menu = 9999;
+                teclado.nextLine();
+                continue;
+            }
+            
             switch (menu) {
                 case 1:
                     System.out.println("Informe o número da conta:");
