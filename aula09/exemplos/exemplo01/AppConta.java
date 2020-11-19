@@ -1,6 +1,5 @@
-package exercicio03;
+package exemplos.exemplo01;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class AppConta {
@@ -9,8 +8,7 @@ public class AppConta {
         int menu;
         int numeroConta;
         double limite, valor;
-        ArrayList<Conta> listaContas = new ArrayList<>();
-        Conta conta = null;
+        GerenciaConta gerenciaConta = new GerenciaConta();
 
         do {
             System.out.println("1-Nova Conta Corrente");
@@ -26,8 +24,7 @@ public class AppConta {
                 case 1:
                     System.out.println("Informe o número da conta:");
                     numeroConta = teclado.nextInt();
-                    conta = new ContaCorrente(numeroConta);
-                    listaContas.add(conta);
+                    gerenciaConta.novaContaCorrente(numeroConta);
                     break;
 
                 case 2:
@@ -35,15 +32,13 @@ public class AppConta {
                     numeroConta = teclado.nextInt();
                     System.out.println("Informe o valor do limite:");
                     limite = teclado.nextDouble();
-                    conta = new ContaEspecial(numeroConta, limite);
-                    listaContas.add(conta);
+                    gerenciaConta.novaContaEspecial(numeroConta, limite);
                     break;
 
                 case 3:
                     System.out.println("Informe o número da conta:");
                     numeroConta = teclado.nextInt();
-                    conta = new ContaPoupanca(numeroConta);
-                    listaContas.add(conta);
+                    gerenciaConta.novaContaPoupanca(numeroConta);
                     break;
 
                 case 4:
@@ -51,10 +46,10 @@ public class AppConta {
                     numeroConta = teclado.nextInt();
                     System.out.println("Informe o valor do depósito:");
                     valor = teclado.nextDouble();
-                    for (Conta c : listaContas) {
-                        if (c.getNumero() == numeroConta) {
-                            c.depositar(valor);
-                        }
+                    if(gerenciaConta.depositar(numeroConta, valor)){
+                        System.out.println("Depositio realizado.");
+                    }else{
+                        System.out.println("Depositio não realizado.");
                     }
                     break;
 
@@ -63,25 +58,20 @@ public class AppConta {
                     numeroConta = teclado.nextInt();
                     System.out.println("Informe o valor do saque:");
                     valor = teclado.nextDouble();
-                    for (Conta c : listaContas) {
-                        if (c.getNumero() == numeroConta) {
-                            c.sacar(valor);
-                        }
+                    if(gerenciaConta.sacar(numeroConta, valor)){
+                        System.out.println("Saque realizado.");
+                    }else{
+                        System.out.println("Saque não realizado.");
                     }
                     break;
 
                 case 6:
                     System.out.println("Informe o número da conta:");
                     numeroConta = teclado.nextInt();
-                    for (Conta c : listaContas) {
-                        if (c.getNumero() == numeroConta) {
-                            System.out.println(c);
-                        }
-                    }
+                    System.out.println(gerenciaConta.exibir(numeroConta));
                     break;
 
                 case 7:
-
                     break;
 
                 default: // se não for nenhuma das opções acima
