@@ -37,6 +37,16 @@ public class UserController {
         return ResponseEntity.notFound().build();
     }
 
+    @GetMapping("/cod/{id}")
+    public ResponseEntity<User> buscaComCodigo(@PathVariable int id){
+        User userFinded = dao.buscaPorId(id);
+
+        if(userFinded != null){
+            return ResponseEntity.ok(userFinded);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
     @PostMapping("/new")
     public ResponseEntity<User> inserirUsuario(@RequestBody User user){
         User newUser = dao.save(user);
@@ -60,6 +70,20 @@ public class UserController {
             return ResponseEntity.ok(userDto);
         }
         return ResponseEntity.notFound().build();
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<UserDto> login(@RequestBody User user){
+        User userFinded = dao.findByEmailOrCpf(user.getEmail(), user.getCpf());
+
+        if(userFinded != null){
+            if(userFinded.getSenha().equals(user.getSenha())){
+                UserDto userDto = new UserDto(userFinded);
+                return ResponseEntity.ok(userDto);
+            }
+            return ResponseEntity.status(401).build();
+        }
+        return ResponseEntity.status(401).build(); 
     }
 
 }
