@@ -1,9 +1,13 @@
 function validaLogin(params) {
-    let usetTxt = localStorage.getItem("userLogged");
+    let userTxt = localStorage.getItem("userLogged");
 
-    if(!usetTxt){
+    if(!userTxt){
         window.location = "index.html";
     }
+
+    let user = JSON.parse(userTxt);
+
+    document.getElementById("dadosUser").innerHTML = `<b> ${user.nome} </b> ( ${user.email} )`;
 }
 
 function logout() {
